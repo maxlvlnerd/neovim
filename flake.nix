@@ -26,7 +26,7 @@
       deps = deps;
       plug = p;
     };
-    extra-programs = with pkgs; [fennel-ls fnlfmt alejandra clang-tools ccls rust-analyzer];
+    extra-programs = with pkgs; [fennel-ls fnlfmt alejandra clang-tools ccls rust-analyzer typescript prettierd];
     my-plugins = with pkgs.vimPlugins; [
       parinfer-rust
       mini-nvim
@@ -36,7 +36,7 @@
       oxocarbon-nvim
       conform-nvim
       rustaceanvim
-      (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust]))
+      (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust p.typescript]))
       (with-deps typescript-tools-nvim [plenary-nvim nvim-lspconfig])
       (with-deps blink-cmp [lspkind-nvim nvim-web-devicons])
       (with-deps telescope-nvim [plenary-nvim nvim-web-devicons telescope-fzf-native-nvim])

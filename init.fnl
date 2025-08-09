@@ -42,7 +42,9 @@
 (plug :nfnl {:ft :fennel})
 (plug :blink.cmp
       {:opts_extend [:sources.default]
-       :opts {:completion {:menu {:draw {:components {:kind_icon {:text cmp-add-icon
+       :opts {:completion {:documentation {:auto_show true
+                                           :auto_show_delay_ms 500}
+                           :menu {:draw {:components {:kind_icon {:text cmp-add-icon
                                                                   :highlight cmp-highlight}}
                                          :columns [[:kind_icon]
                                                    {1 :label
@@ -75,6 +77,7 @@
               :format_on_save {:timeout_ms 500}
               :formatters_by_ft {:fennel [:fnlfmt]
                                  :nix [:alejandra]
+                                 :typescript [:prettierd]
                                  ; :rust [:rustfmt]
                                  :c [:clang-format]}}})
 
@@ -98,6 +101,7 @@
                    (tele.setup opts)
                    (tele.load_extension :fzf)))})
 
+(plug :typescript-tools.nvim {:opts {}})
 (load-lazy)
 
 (new-cmd :SourceExrc (fn []

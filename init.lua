@@ -58,7 +58,7 @@ end
 vim.g.mapleader = " "
 plug("conjure", {ft = "fennel"})
 plug("nfnl", {ft = "fennel"})
-plug("blink.cmp", {opts_extend = {"sources.default"}, opts = {completion = {menu = {draw = {components = {kind_icon = {text = cmp_add_icon, highlight = cmp_highlight}}, columns = {{"kind_icon"}, {"label", "label_description", "source_name", gap = 1}}}}}, sources = {default = {"lsp", "path", "buffer"}}}})
+plug("blink.cmp", {opts_extend = {"sources.default"}, opts = {completion = {documentation = {auto_show = true, auto_show_delay_ms = 500}, menu = {draw = {components = {kind_icon = {text = cmp_add_icon, highlight = cmp_highlight}}, columns = {{"kind_icon"}, {"label", "label_description", "source_name", gap = 1}}}}}, sources = {default = {"lsp", "path", "buffer"}}}})
 local function _6_(_, opts)
   vim.opt.rtp:prepend(_G["tree-sitter-path"])
   local ts = require("nvim-treesitter.configs")
@@ -77,13 +77,14 @@ end
 local function _9_()
   return require("conform").format({async = true})
 end
-plug("conform.nvim", {cmd = "ConformInfo", event = "BufWritePre", init = _8_, keys = {{"<leader>f", _9_, desc = "Format buffer", mode = ""}}, opts = {default_format_opts = {lsp_format = "fallback"}, format_on_save = {timeout_ms = 500}, formatters_by_ft = {fennel = {"fnlfmt"}, nix = {"alejandra"}, c = {"clang-format"}}}})
+plug("conform.nvim", {cmd = "ConformInfo", event = "BufWritePre", init = _8_, keys = {{"<leader>f", _9_, desc = "Format buffer", mode = ""}}, opts = {default_format_opts = {lsp_format = "fallback"}, format_on_save = {timeout_ms = 500}, formatters_by_ft = {fennel = {"fnlfmt"}, nix = {"alejandra"}, typescript = {"prettierd"}, c = {"clang-format"}}}})
 local function _10_(_, opts)
   local tele = require("telescope")
   tele.setup(opts)
   return tele.load_extension("fzf")
 end
 plug("telescope.nvim", {keys = {{"<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find files"}, {"<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope live grep"}, {"<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers"}, {"<leader>ld", "<cmd>Telescope diagnostics<cr>", desc = "Telescope lsp diagnostics"}}, config = _10_, lazy = false})
+plug("typescript-tools.nvim", {opts = {}})
 load_lazy()
 local function _11_()
   local exrc = (vim.fn.getcwd() .. "/.nvim.lua")
