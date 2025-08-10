@@ -113,6 +113,7 @@
 
 (vim.lsp.enable :fennel_ls)
 (vim.lsp.enable :ccls)
+(vim.lsp.enable :nixd)
 (set vim.opt.signcolumn :number)
 (set vim.opt.number true)
 (set vim.opt.relativenumber true)

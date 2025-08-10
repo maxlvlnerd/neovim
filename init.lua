@@ -98,6 +98,7 @@ new_cmd("SourceExrc", _11_)
 noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", action = "l"}})
 vim.lsp.enable("fennel_ls")
 vim.lsp.enable("ccls")
+vim.lsp.enable("nixd")
 vim.opt.signcolumn = "number"
 vim.opt.number = true
 vim.opt.relativenumber = true
