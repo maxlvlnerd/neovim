@@ -38,6 +38,8 @@
       rustaceanvim
       (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust p.typescript]))
       (with-deps typescript-tools-nvim [plenary-nvim nvim-lspconfig])
+      (with-deps nvim-ufo [promise-async])
+      (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust]))
       (with-deps blink-cmp [lspkind-nvim nvim-web-devicons])
       (with-deps telescope-nvim [plenary-nvim nvim-web-devicons telescope-fzf-native-nvim])
     ];

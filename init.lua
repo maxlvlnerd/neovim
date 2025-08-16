@@ -85,8 +85,12 @@ local function _10_(_, opts)
 end
 plug("telescope.nvim", {keys = {{"<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find files"}, {"<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope live grep"}, {"<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers"}, {"<leader>ld", "<cmd>Telescope diagnostics<cr>", desc = "Telescope lsp diagnostics"}}, config = _10_, lazy = false})
 plug("typescript-tools.nvim", {opts = {}})
-load_lazy()
 local function _11_()
+  return {"treesitter", "indent"}
+end
+plug("nvim-ufo", {opts = {provider_selector = _11_}})
+load_lazy()
+local function _12_()
   local exrc = (vim.fn.getcwd() .. "/.nvim.lua")
   if vim.secure.read(exrc) then
     return vim.cmd.source(exrc)
@@ -94,11 +98,15 @@ local function _11_()
     return nil
   end
 end
-new_cmd("SourceExrc", _11_)
+new_cmd("SourceExrc", _12_)
 noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", action = "l"}})
+noremap({{key = "zR", action = require("ufo").openAllFolds, desc = "Open all folds"}})
+noremap({{key = "zM", action = require("ufo").closeAllFolds, desc = "Close all folds"}})
 vim.lsp.enable("fennel_ls")
 vim.lsp.enable("ccls")
 vim.lsp.enable("nixd")
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
 vim.opt.signcolumn = "number"
 vim.opt.number = true
 vim.opt.relativenumber = true

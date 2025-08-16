@@ -102,6 +102,7 @@
                    (tele.load_extension :fzf)))})
 
 (plug :typescript-tools.nvim {:opts {}})
+(plug :nvim-ufo {:opts {:provider_selector (fn [] [:treesitter :indent])}})
 (load-lazy)
 
 (new-cmd :SourceExrc (fn []
@@ -110,10 +111,19 @@
                            (vim.cmd.source exrc)))))
 
 (noremap [{:key :n :action :j} {:key :e :action :k} {:key :o :action :l}])
+(noremap [{:key :zR
+           :action (. (require :ufo) :openAllFolds)
+           :desc "Open all folds"}])
+
+(noremap [{:key :zM
+           :action (. (require :ufo) :closeAllFolds)
+           :desc "Close all folds"}])
 
 (vim.lsp.enable :fennel_ls)
 (vim.lsp.enable :ccls)
 (vim.lsp.enable :nixd)
+(set vim.opt.foldlevel 99)
+(set vim.opt.foldlevelstart 99)
 (set vim.opt.signcolumn :number)
 (set vim.opt.number true)
 (set vim.opt.relativenumber true)
