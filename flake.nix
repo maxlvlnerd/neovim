@@ -36,7 +36,7 @@
       oxocarbon-nvim
       conform-nvim
       rustaceanvim
-      (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust p.typescript]))
+      (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust p.typescript p.tsx]))
       (with-deps typescript-tools-nvim [plenary-nvim nvim-lspconfig])
       (with-deps nvim-ufo [promise-async])
       (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust]))
