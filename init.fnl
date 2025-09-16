@@ -120,8 +120,6 @@
            :desc "Close all folds"}])
 
 (vim.lsp.enable :fennel_ls)
-(vim.lsp.enable :ccls)
-(vim.lsp.enable :nixd)
 (set vim.opt.foldlevel 99)
 (set vim.opt.foldlevelstart 99)
 (set vim.opt.signcolumn :number)

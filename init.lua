@@ -103,8 +103,6 @@ noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", actio
 noremap({{key = "zR", action = require("ufo").openAllFolds, desc = "Open all folds"}})
 noremap({{key = "zM", action = require("ufo").closeAllFolds, desc = "Close all folds"}})
 vim.lsp.enable("fennel_ls")
-vim.lsp.enable("ccls")
-vim.lsp.enable("nixd")
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.signcolumn = "number"
