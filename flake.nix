@@ -26,7 +26,7 @@
       deps = deps;
       plug = p;
     };
-    extra-programs = with pkgs; [fennel-ls fnlfmt alejandra rust-analyzer typescript prettierd];
+    extra-programs = with pkgs; [fennel-ls fnlfmt alejandra rust-analyzer typescript prettierd nodejs];
     my-plugins = with pkgs.vimPlugins; [
       parinfer-rust
       mini-nvim
