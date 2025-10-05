@@ -77,7 +77,7 @@ end
 local function _9_()
   return require("conform").format({async = true})
 end
-plug("conform.nvim", {cmd = "ConformInfo", event = "BufWritePre", init = _8_, keys = {{"<leader>f", _9_, desc = "Format buffer", mode = ""}}, opts = {default_format_opts = {lsp_format = "fallback"}, format_on_save = {timeout_ms = 500}, formatters_by_ft = {fennel = {"fnlfmt"}, nix = {"alejandra"}, typescript = {"prettierd"}, c = {"clang-format"}}}})
+plug("conform.nvim", {cmd = "ConformInfo", event = "BufWritePre", init = _8_, keys = {{"<leader>f", _9_, desc = "Format buffer", mode = ""}}, opts = {default_format_opts = {lsp_format = "fallback"}, format_on_save = {timeout_ms = 500}, formatters_by_ft = {fennel = {"fnlfmt"}, nix = {"alejandra"}, typescript = {"prettierd"}}}})
 local function _10_(_, opts)
   local tele = require("telescope")
   tele.setup(opts)

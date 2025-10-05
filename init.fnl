@@ -77,9 +77,8 @@
               :format_on_save {:timeout_ms 500}
               :formatters_by_ft {:fennel [:fnlfmt]
                                  :nix [:alejandra]
-                                 :typescript [:prettierd]
                                  ; :rust [:rustfmt]
-                                 :c [:clang-format]}}})
+                                 :typescript [:prettierd]}}})
 
 ;        :webhooked/kanso.nvim
 (plug :telescope.nvim
