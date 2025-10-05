@@ -88,7 +88,7 @@
               {1 :<leader>fg
                2 "<cmd>Telescope live_grep<cr>"
                :desc "Telescope live grep"}
-              {1 :<leader>fb
+              {1 :<leader><space>
                2 "<cmd>Telescope buffers<cr>"
                :desc "Telescope buffers"}
               {1 :<leader>ld

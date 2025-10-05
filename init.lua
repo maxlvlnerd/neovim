@@ -83,7 +83,7 @@ local function _10_(_, opts)
   tele.setup(opts)
   return tele.load_extension("fzf")
 end
-plug("telescope.nvim", {keys = {{"<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find files"}, {"<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope live grep"}, {"<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers"}, {"<leader>ld", "<cmd>Telescope diagnostics<cr>", desc = "Telescope lsp diagnostics"}}, config = _10_, lazy = false})
+plug("telescope.nvim", {keys = {{"<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find files"}, {"<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope live grep"}, {"<leader><space>", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers"}, {"<leader>ld", "<cmd>Telescope diagnostics<cr>", desc = "Telescope lsp diagnostics"}}, config = _10_, lazy = false})
 plug("typescript-tools.nvim", {opts = {}})
 local function _11_()
   return {"treesitter", "indent"}
