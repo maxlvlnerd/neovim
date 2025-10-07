@@ -89,8 +89,12 @@ local function _11_()
   return {"treesitter", "indent"}
 end
 plug("nvim-ufo", {opts = {provider_selector = _11_}})
-load_lazy()
 local function _12_()
+  return Snacks.lazygit()
+end
+plug("snacks.nvim", {keys = {{"<leader>gg", _12_, desc = "Lazygit"}}, priority = 1000, opts = {lazygit = {enabled = true}}, lazy = false})
+load_lazy()
+local function _13_()
   local exrc = (vim.fn.getcwd() .. "/.nvim.lua")
   if vim.secure.read(exrc) then
     return vim.cmd.source(exrc)
@@ -98,7 +102,7 @@ local function _12_()
     return nil
   end
 end
-new_cmd("SourceExrc", _12_)
+new_cmd("SourceExrc", _13_)
 noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", action = "l"}})
 noremap({{key = "zR", action = require("ufo").openAllFolds, desc = "Open all folds"}})
 noremap({{key = "zM", action = require("ufo").closeAllFolds, desc = "Close all folds"}})

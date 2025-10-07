@@ -102,6 +102,11 @@
 
 (plug :typescript-tools.nvim {:opts {}})
 (plug :nvim-ufo {:opts {:provider_selector (fn [] [:treesitter :indent])}})
+(plug :snacks.nvim {:keys [{1 :<leader>gg 2 #(Snacks.lazygit) :desc :Lazygit}]
+                    :lazy false
+                    :priority 1000
+                    :opts {:lazygit {:enabled true}}})
+
 (load-lazy)
 
 (new-cmd :SourceExrc (fn []
