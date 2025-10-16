@@ -115,6 +115,7 @@
                            (vim.cmd.source exrc)))))
 
 (noremap [{:key :n :action :j} {:key :e :action :k} {:key :o :action :l}])
+(noremap [{:key :grd :action #(vim.lsp.buf.definition)}])
 (noremap [{:key :zR
            :action (. (require :ufo) :openAllFolds)
            :desc "Open all folds"}])

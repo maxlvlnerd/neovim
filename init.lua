@@ -104,6 +104,10 @@ local function _13_()
 end
 new_cmd("SourceExrc", _13_)
 noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", action = "l"}})
+local function _15_()
+  return vim.lsp.buf.definition()
+end
+noremap({{key = "grd", action = _15_}})
 noremap({{key = "zR", action = require("ufo").openAllFolds, desc = "Open all folds"}})
 noremap({{key = "zM", action = require("ufo").closeAllFolds, desc = "Close all folds"}})
 vim.lsp.enable("fennel_ls")
