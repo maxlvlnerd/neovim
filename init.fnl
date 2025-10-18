@@ -38,7 +38,7 @@
   hl)
 
 (set vim.g.mapleader " ")
-(plug :conjure {:ft :fennel})
+; (plug :conjure {:ft :fennel})
 (plug :nfnl {:ft :fennel})
 (plug :blink.cmp
       {:opts_extend [:sources.default]

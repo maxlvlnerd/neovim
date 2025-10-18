@@ -56,7 +56,6 @@ local function cmp_highlight(ctx)
   return hl
 end
 vim.g.mapleader = " "
-plug("conjure", {ft = "fennel"})
 plug("nfnl", {ft = "fennel"})
 plug("blink.cmp", {opts_extend = {"sources.default"}, opts = {completion = {documentation = {auto_show = true, auto_show_delay_ms = 500}, menu = {draw = {components = {kind_icon = {text = cmp_add_icon, highlight = cmp_highlight}}, columns = {{"kind_icon"}, {"label", "label_description", "source_name", gap = 1}}}}}, sources = {default = {"lsp", "path", "buffer"}}}})
 local function _6_(_, opts)

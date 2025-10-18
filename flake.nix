@@ -32,7 +32,7 @@
       mini-nvim
       nvim-lspconfig
       nfnl
-      conjure
+      # conjure
       oxocarbon-nvim
       conform-nvim
       rustaceanvim
