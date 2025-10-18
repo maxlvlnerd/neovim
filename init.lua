@@ -93,6 +93,7 @@ local function _12_()
   return Snacks.lazygit()
 end
 plug("snacks.nvim", {keys = {{"<leader>gg", _12_, desc = "Lazygit"}}, priority = 1000, opts = {lazygit = {enabled = true}}, lazy = false})
+plug("neorg", {opts = {load = {["core.defaults"] = {}, ["core.concealer"] = {}, ["core.dirman"] = {config = {workspaces = {main = "~/persist/logs/notes"}, index = "index.norg"}}}}})
 load_lazy()
 local function _13_()
   local exrc = (vim.fn.getcwd() .. "/.nvim.lua")

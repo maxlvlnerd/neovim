@@ -107,6 +107,12 @@
                     :priority 1000
                     :opts {:lazygit {:enabled true}}})
 
+(plug :neorg
+      {:opts {:load {:core.defaults {}
+                     :core.concealer {}
+                     :core.dirman {:config {:workspaces {:main "~/persist/logs/notes"}
+                                            :index :index.norg}}}}})
+
 (load-lazy)
 
 (new-cmd :SourceExrc (fn []

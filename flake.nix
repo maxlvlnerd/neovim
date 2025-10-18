@@ -37,7 +37,21 @@
       conform-nvim
       rustaceanvim
       snacks-nvim
-      (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust p.typescript p.tsx]))
+      (with-deps neorg [
+        (pkgs.vimUtils.buildVimPlugin {
+          inherit (pkgs.luajitPackages.lua-utils-nvim) pname version src;
+        })
+
+        (pkgs.vimUtils.buildVimPlugin {
+          inherit (pkgs.luajitPackages.pathlib-nvim) pname version src;
+          doCheck = false;
+        })
+
+        (pkgs.vimUtils.buildVimPlugin {
+          inherit (pkgs.luajitPackages.nvim-nio) pname version src;
+        })
+      ])
+      (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust p.typescript p.tsx p.tree-sitter-norg p.tree-sitter-norg-meta]))
       (with-deps typescript-tools-nvim [plenary-nvim nvim-lspconfig])
       (with-deps nvim-ufo [promise-async])
       (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust]))
