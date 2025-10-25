@@ -41,15 +41,13 @@
         (pkgs.vimUtils.buildVimPlugin {
           inherit (pkgs.luajitPackages.lua-utils-nvim) pname version src;
         })
-
         (pkgs.vimUtils.buildVimPlugin {
           inherit (pkgs.luajitPackages.pathlib-nvim) pname version src;
           doCheck = false;
         })
-
-        (pkgs.vimUtils.buildVimPlugin {
-          inherit (pkgs.luajitPackages.nvim-nio) pname version src;
-        })
+        nvim-nio
+        plenary-nvim
+        nui-nvim
       ])
       (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust p.typescript p.tsx p.tree-sitter-norg p.tree-sitter-norg-meta]))
       (with-deps typescript-tools-nvim [plenary-nvim nvim-lspconfig])
