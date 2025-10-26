@@ -45,6 +45,17 @@
           inherit (pkgs.luajitPackages.pathlib-nvim) pname version src;
           doCheck = false;
         })
+        (pkgs.vimUtils.buildVimPlugin {
+          pname = "neorg-interim-ls";
+          version = "v2.1.2";
+          src = pkgs.fetchFromGitHub {
+            owner = "benlubas";
+            repo = "neorg-interim-ls";
+            rev = "aab7f01bab1db773b18199af1633039933c1fe29";
+            sha256 = "s9AUVQ8pGsOE95CdbqvpP5/rFaSucG92Wwx1tvib+0M=";
+          };
+          doCheck = false;
+        })
         nvim-nio
         plenary-nvim
         nui-nvim
