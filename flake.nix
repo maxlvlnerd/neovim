@@ -37,6 +37,7 @@
       conform-nvim
       rustaceanvim
       snacks-nvim
+      quick-scope
       (with-deps neorg [
         (pkgs.vimUtils.buildVimPlugin {
           inherit (pkgs.luajitPackages.lua-utils-nvim) pname version src;
