@@ -84,15 +84,25 @@
 (plug :typescript-tools.nvim {:opts {}})
 (plug :nvim-ufo {:opts {:provider_selector (fn [] [:treesitter :indent])}})
 
+(fn neorg-finder []
+  (let [neorg (require :neorg)
+        dirman (neorg.modules.get_module :core.dirman)
+        [workspace cwd] (dirman.get_current_workspace)
+        workspace-files (dirman.get_norg_files workspace)]
+    (icollect [_ v (ipairs workspace-files)]
+      {:file (tostring v)})))
+
 (plug :snacks.nvim
       {:keys [{1 :<leader>gg 2 #(Snacks.lazygit) :desc :Lazygit}
               {1 :<leader><space> 2 #(Snacks.picker.smart)}
               {1 :<leader>fg 2 #(Snacks.picker.grep)}
               {1 "<leader>," 2 #(Snacks.picker.buffers)}
-              {1 :<leader>ld 2 #(Snacks.picker.diagnostics)}]
+              {1 :<leader>ld 2 #(Snacks.picker.diagnostics)}
+              {1 :<leader>no 2 #(Snacks.picker.neorg)}]
        :lazy false
        :priority 1000
-       :opts {:lazygit {:enabled true} :picker {:enabled true}}})
+       :opts {:lazygit {:enabled true}
+              :picker {:sources {:neorg {:finder neorg-finder}}}}})
 
 (plug :neorg
       {:opts {:load {:core.defaults {}
@@ -101,7 +111,7 @@
                                                                           :documentation true}}}
                      :core.completion {:config {:engine {:module_name :external.lsp-completion}}}
                      :core.dirman {:config {:workspaces {:main "~/persist/logs/notes"}
-                                            :index :index.norg}}}}})
+                                            :default_workspace :main}}}}})
 
 (load-lazy)
 
