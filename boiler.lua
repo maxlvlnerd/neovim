@@ -44,6 +44,6 @@
  local _let_6_ = dirman.get_current_workspace() local workspace = _let_6_[1] local cwd = _let_6_[2]
  local workspace_files = dirman.get_norg_files(workspace)
  local tbl_21_ = {} local i_22_ = 0 for _, v in ipairs(workspace_files) do
- local val_23_ = {file = tostring(v)} if (nil ~= val_23_) then i_22_ = (i_22_ + 1) tbl_21_[i_22_] = val_23_ else end end return tbl_21_ end
+ local val_23_ = {text = tostring(v:relative_to(cwd, false)), file = tostring(v)} if (nil ~= val_23_) then i_22_ = (i_22_ + 1) tbl_21_[i_22_] = val_23_ else end end return tbl_21_ end
 
  return {plug = plug, noremap = noremap, ["load-lazy"] = load_lazy, ["new-cmd"] = new_cmd, ["cmp-highlight"] = cmp_highlight, ["cmp-add-icon"] = cmp_add_icon, ["neorg-finder"] = neorg_finder}

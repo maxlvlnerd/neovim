@@ -43,7 +43,7 @@
         [workspace cwd] (dirman.get_current_workspace)
         workspace-files (dirman.get_norg_files workspace)]
     (icollect [_ v (ipairs workspace-files)]
-      {:file (tostring v)})))
+      {:text (tostring (v:relative_to cwd false)) :file (tostring v)})))
 
 {: plug
  : noremap
