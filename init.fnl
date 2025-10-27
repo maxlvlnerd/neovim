@@ -23,6 +23,7 @@
 (set vim.opt.signcolumn :number)
 (set vim.opt.number true)
 (set vim.opt.relativenumber true)
+(set vim.opt.hlsearch false)
 (vim.cmd.colorscheme :oxocarbon)
 
 (new-cmd :SourceExrc (fn [])

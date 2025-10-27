@@ -18,7 +18,8 @@
 
 
 
- vim.lsp.enable("fennel_ls") vim.opt.foldlevel = 99 vim.opt.foldlevelstart = 99 vim.opt.signcolumn = "number" vim.opt.number = true vim.opt.relativenumber = true
+ vim.lsp.enable("fennel_ls") vim.opt.foldlevel = 99 vim.opt.foldlevelstart = 99 vim.opt.signcolumn = "number" vim.opt.number = true vim.opt.relativenumber = true vim.opt.hlsearch = false
+
 
 
 
