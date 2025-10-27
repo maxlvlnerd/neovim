@@ -77,24 +77,30 @@ local function _9_()
   return require("conform").format({async = true})
 end
 plug("conform.nvim", {cmd = "ConformInfo", event = "BufWritePre", init = _8_, keys = {{"<leader>f", _9_, desc = "Format buffer", mode = ""}}, opts = {default_format_opts = {lsp_format = "fallback"}, format_on_save = {timeout_ms = 500}, formatters_by_ft = {fennel = {"fnlfmt"}, nix = {"alejandra"}, typescript = {"prettierd"}}}})
-local function _10_(_, opts)
-  local tele = require("telescope")
-  tele.setup(opts)
-  return tele.load_extension("fzf")
-end
-plug("telescope.nvim", {keys = {{"<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find files"}, {"<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope live grep"}, {"<leader><space>", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers"}, {"<leader>ld", "<cmd>Telescope diagnostics<cr>", desc = "Telescope lsp diagnostics"}}, config = _10_, lazy = false})
 plug("typescript-tools.nvim", {opts = {}})
-local function _11_()
+local function _10_()
   return {"treesitter", "indent"}
 end
-plug("nvim-ufo", {opts = {provider_selector = _11_}})
-local function _12_()
+plug("nvim-ufo", {opts = {provider_selector = _10_}})
+local function _11_()
   return Snacks.lazygit()
 end
-plug("snacks.nvim", {keys = {{"<leader>gg", _12_, desc = "Lazygit"}}, priority = 1000, opts = {lazygit = {enabled = true}}, lazy = false})
+local function _12_()
+  return Snacks.picker.smart()
+end
+local function _13_()
+  return Snacks.picker.grep()
+end
+local function _14_()
+  return Snacks.picker.buffers()
+end
+local function _15_()
+  return Snacks.picker.diagnostics()
+end
+plug("snacks.nvim", {keys = {{"<leader>gg", _11_, desc = "Lazygit"}, {"<leader><space>", _12_}, {"<leader>fg", _13_}, {"<leader>,", _14_}, {"<leader>ld", _15_}}, priority = 1000, opts = {lazygit = {enabled = true}, picker = {enabled = true}}, lazy = false})
 plug("neorg", {opts = {load = {["core.defaults"] = {}, ["core.concealer"] = {}, ["external.interim-ls"] = {config = {completion_provider = {enable = true, documentation = true}}}, ["core.completion"] = {config = {engine = {module_name = "external.lsp-completion"}}}, ["core.dirman"] = {config = {workspaces = {main = "~/persist/logs/notes"}, index = "index.norg"}}}}})
 load_lazy()
-local function _13_()
+local function _16_()
   local exrc = (vim.fn.getcwd() .. "/.nvim.lua")
   if vim.secure.read(exrc) then
     return vim.cmd.source(exrc)
@@ -102,12 +108,12 @@ local function _13_()
     return nil
   end
 end
-new_cmd("SourceExrc", _13_)
+new_cmd("SourceExrc", _16_)
 noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", action = "l"}})
-local function _15_()
+local function _18_()
   return vim.lsp.buf.definition()
 end
-noremap({{key = "grd", action = _15_}})
+noremap({{key = "grd", action = _18_}})
 noremap({{key = "zR", action = require("ufo").openAllFolds, desc = "Open all folds"}})
 noremap({{key = "zM", action = require("ufo").closeAllFolds, desc = "Close all folds"}})
 vim.lsp.enable("fennel_ls")

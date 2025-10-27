@@ -81,31 +81,18 @@
                                  :typescript [:prettierd]}}})
 
 ;        :webhooked/kanso.nvim
-(plug :telescope.nvim
-      {:keys [{1 :<leader>ff
-               2 "<cmd>Telescope find_files<cr>"
-               :desc "Telescope find files"}
-              {1 :<leader>fg
-               2 "<cmd>Telescope live_grep<cr>"
-               :desc "Telescope live grep"}
-              {1 :<leader><space>
-               2 "<cmd>Telescope buffers<cr>"
-               :desc "Telescope buffers"}
-              {1 :<leader>ld
-               2 "<cmd>Telescope diagnostics<cr>"
-               :desc "Telescope lsp diagnostics"}]
-       :lazy false
-       :config (fn [_ opts]
-                 (let [tele (require :telescope)]
-                   (tele.setup opts)
-                   (tele.load_extension :fzf)))})
-
 (plug :typescript-tools.nvim {:opts {}})
 (plug :nvim-ufo {:opts {:provider_selector (fn [] [:treesitter :indent])}})
-(plug :snacks.nvim {:keys [{1 :<leader>gg 2 #(Snacks.lazygit) :desc :Lazygit}]
-                    :lazy false
-                    :priority 1000
-                    :opts {:lazygit {:enabled true}}})
+
+(plug :snacks.nvim
+      {:keys [{1 :<leader>gg 2 #(Snacks.lazygit) :desc :Lazygit}
+              {1 :<leader><space> 2 #(Snacks.picker.smart)}
+              {1 :<leader>fg 2 #(Snacks.picker.grep)}
+              {1 "<leader>," 2 #(Snacks.picker.buffers)}
+              {1 :<leader>ld 2 #(Snacks.picker.diagnostics)}]
+       :lazy false
+       :priority 1000
+       :opts {:lazygit {:enabled true} :picker {:enabled true}}})
 
 (plug :neorg
       {:opts {:load {:core.defaults {}

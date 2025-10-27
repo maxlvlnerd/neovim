@@ -65,7 +65,6 @@
       (with-deps nvim-ufo [promise-async])
       (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust]))
       (with-deps blink-cmp [lspkind-nvim nvim-web-devicons])
-      (with-deps telescope-nvim [plenary-nvim nvim-web-devicons telescope-fzf-native-nvim])
     ];
     plugins-normalized = pkgs.lib.map normalize-plugin my-plugins;
     tree-sitter-grammars = let
