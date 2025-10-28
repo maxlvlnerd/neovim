@@ -22,28 +22,4 @@
  local function new_cmd(name, cb)
  return vim.api.nvim_create_user_command(name, cb, {}) end
 
- local function cmp_add_icon(ctx)
- local icon = ctx.kind_icon
- if vim.tbl_contains({"Path"}, ctx.source_name) then
- local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
- if dev_icon then icon = dev_icon else end else
- icon = require("lspkind").symbolic(ctx.kind, {mode = "symbol"}) end
- return (icon .. ctx.icon_gap) end
-
- local function cmp_highlight(ctx)
- local hl = ctx.kind_hl
- if vim.tbl_contains({"Path"}, ctx.source_name) then
-
- local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
- if dev_icon then hl = dev_hl else end else end
- return hl end
-
- local function neorg_finder()
- local neorg = require("neorg")
- local dirman = neorg.modules.get_module("core.dirman")
- local _let_6_ = dirman.get_current_workspace() local workspace = _let_6_[1] local cwd = _let_6_[2]
- local workspace_files = dirman.get_norg_files(workspace)
- local tbl_21_ = {} local i_22_ = 0 for _, v in ipairs(workspace_files) do
- local val_23_ = {text = tostring(v:relative_to(cwd, false)), file = tostring(v)} if (nil ~= val_23_) then i_22_ = (i_22_ + 1) tbl_21_[i_22_] = val_23_ else end end return tbl_21_ end
-
- return {plug = plug, noremap = noremap, ["load-lazy"] = load_lazy, ["new-cmd"] = new_cmd, ["cmp-highlight"] = cmp_highlight, ["cmp-add-icon"] = cmp_add_icon, ["neorg-finder"] = neorg_finder}
+ return {plug = plug, noremap = noremap, ["load-lazy"] = load_lazy, ["new-cmd"] = new_cmd}

@@ -1,4 +1,13 @@
-(local {: plug : neorg-finder} (require :boiler))
+(local {: plug} (require :boiler))
+
+(fn neorg-finder []
+  (let [neorg (require :neorg)
+        dirman (neorg.modules.get_module :core.dirman)
+        [workspace cwd] (dirman.get_current_workspace)
+        workspace-files (dirman.get_norg_files workspace)]
+    (icollect [_ v (ipairs workspace-files)]
+      {:text (tostring (v:relative_to cwd false)) :file (tostring v)})))
+
 (plug :snacks.nvim
       {:keys [{1 :<leader>gg 2 #(Snacks.lazygit) :desc :Lazygit}
               {1 :<leader><space> 2 #(Snacks.picker.smart)}
