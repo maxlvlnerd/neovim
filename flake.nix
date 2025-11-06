@@ -63,7 +63,6 @@
       ])
       (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust p.typescript p.tsx p.tree-sitter-norg p.tree-sitter-norg-meta]))
       (with-deps typescript-tools-nvim [plenary-nvim nvim-lspconfig])
-      (with-deps nvim-ufo [promise-async])
       (with-deps blink-cmp [lspkind-nvim nvim-web-devicons])
     ];
     plugins-normalized = pkgs.lib.map normalize-plugin my-plugins;

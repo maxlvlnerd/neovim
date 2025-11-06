@@ -14,12 +14,6 @@
                    (let [ts (require :nvim-treesitter.configs)]
                      (ts.setup opts)))})
   (plug :typescript-tools.nvim {:opts {}})
-  (plug :nvim-ufo {:opts {:provider_selector (fn [] [:treesitter :indent])}})
-  (noremap [{:key :zR
-             :action #((. (require :ufo) :openAllFolds) :desc "Open all folds")}])
-  (noremap [{:key :zM
-             :action #((. (require :ufo) :closeAllFolds) :desc
-                                                         "Close all folds")}])
 
   (fn neorg-finder []
     (let [neorg (require :neorg)
@@ -98,8 +92,6 @@
 
 (load-lazy)
 (vim.lsp.enable :fennel_ls)
-(set vim.opt.foldlevel 99)
-(set vim.opt.foldlevelstart 99)
 (set vim.opt.signcolumn :number)
 (set vim.opt.number true)
 (set vim.opt.relativenumber true)
