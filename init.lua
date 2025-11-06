@@ -60,33 +60,7 @@
 
 
 
-
-
- local function cmp_add_icon(ctx)
- local icon = ctx.kind_icon
- if vim.tbl_contains({"Path"}, ctx.source_name) then
- local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
- if dev_icon then icon = dev_icon else end else
- icon = require("lspkind").symbolic(ctx.kind, {mode = "symbol"}) end
- return (icon .. ctx.icon_gap) end
-
- local function cmp_highlight(ctx)
- local hl = ctx.kind_hl
- if vim.tbl_contains({"Path"}, ctx.source_name) then
-
- local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
- if dev_icon then hl = dev_hl else end else end
- return hl end
-
- plug("blink.cmp", {opts_extend = {"sources.default"}, opts = {completion = {documentation = {auto_show = true, auto_show_delay_ms = 500}, menu = {draw = {components = {kind_icon = {text = cmp_add_icon, highlight = cmp_highlight}}, columns = {{"kind_icon"}, {"label", "label_description", "source_name", gap = 1}}}}}, sources = {default = {"lsp", "path", "buffer"}}}}) end
-
-
-
-
-
-
-
-
+ plug("blink.cmp", {opts = {completion = {documentation = {auto_show = true, auto_show_delay_ms = 500}}, sources = {default = {"lsp", "path", "buffer"}}}}) end
 
 
 
@@ -99,10 +73,10 @@
 
  vim.cmd.colorscheme("oxocarbon")
 
- local function _19_()
+ local function _15_()
  local exrc = (vim.fn.getcwd() .. "/.nvim.lua")
  if vim.secure.read(exrc) then
- return vim.cmd.source(exrc) else return nil end end new_cmd("SourceExrc", _19_)
+ return vim.cmd.source(exrc) else return nil end end new_cmd("SourceExrc", _15_)
 
  noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", action = "l"}})
- local function _21_() return vim.lsp.buf.definition() end return noremap({{key = "grd", action = _21_}})
+ local function _17_() return vim.lsp.buf.definition() end return noremap({{key = "grd", action = _17_}})
