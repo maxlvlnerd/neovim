@@ -107,10 +107,10 @@
 
  vim.cmd.colorscheme("oxocarbon")
 
- local function _22_() end
- local function _23_(...) local exrc = (vim.fn.getcwd() .. "/.nvim.lua")
+ local function _22_()
+ local exrc = (vim.fn.getcwd() .. "/.nvim.lua")
  if vim.secure.read(exrc) then
- return vim.cmd.source(exrc) else return nil end end new_cmd("SourceExrc", _22_, _23_(...))
+ return vim.cmd.source(exrc) else return nil end end new_cmd("SourceExrc", _22_)
 
  noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", action = "l"}})
- local function _25_() return vim.lsp.buf.definition() end return noremap({{key = "grd", action = _25_}})
+ local function _24_() return vim.lsp.buf.definition() end return noremap({{key = "grd", action = _24_}})
