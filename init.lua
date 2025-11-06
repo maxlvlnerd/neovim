@@ -1,23 +1,103 @@
 -- [nfnl] init.fnl
- package.preload["boiler"] = package.preload["boiler"] or function(...) local function noremap(maps) for _, v in ipairs(maps) do vim.keymap.set((v.mode or ""), v.key, v.action, {silent = true, desc = v.desc}) end return nil end local function plug(name, opts) _G["plugin-specs"][name] = vim.tbl_extend("force", _G["plugin-specs"][name], opts) return nil end local function load_lazy() local lazy = require("lazy") local plugs do local tbl_21_ = {} local i_22_ = 0 for _, v in pairs(_G["plugin-specs"]) do local val_23_ = v if (nil ~= val_23_) then i_22_ = (i_22_ + 1) tbl_21_[i_22_] = val_23_ else end end plugs = tbl_21_ end return lazy.setup({checker = {enabled = true}, rocks = {enabled = false}, profiling = {loader = true, require = true}, spec = plugs}) end local function new_cmd(name, cb) return vim.api.nvim_create_user_command(name, cb, {}) end return {plug = plug, noremap = noremap, ["load-lazy"] = load_lazy, ["new-cmd"] = new_cmd} end local _local_2_ = require("boiler") local new_cmd = _local_2_["new-cmd"] local load_lazy = _local_2_["load-lazy"] local noremap = _local_2_["noremap"] vim.g.mapleader = " "
+ package.preload["boiler"] = package.preload["boiler"] or function(...) local function noremap(maps) for _, v in ipairs(maps) do vim.keymap.set((v.mode or ""), v.key, v.action, {silent = true, desc = v.desc}) end return nil end local function plug(name, opts) _G["plugin-specs"][name] = vim.tbl_extend("force", _G["plugin-specs"][name], opts) return nil end local function load_lazy() local lazy = require("lazy") local plugs do local tbl_26_ = {} local i_27_ = 0 for _, v in pairs(_G["plugin-specs"]) do local val_28_ = v if (nil ~= val_28_) then i_27_ = (i_27_ + 1) tbl_26_[i_27_] = val_28_ else end end plugs = tbl_26_ end return lazy.setup({checker = {enabled = true}, rocks = {enabled = false}, profiling = {loader = true, require = true}, spec = plugs}) end local function new_cmd(name, cb) return vim.api.nvim_create_user_command(name, cb, {}) end return {plug = plug, noremap = noremap, ["load-lazy"] = load_lazy, ["new-cmd"] = new_cmd} end local _local_2_ = require("boiler") local plug = _local_2_.plug local new_cmd = _local_2_["new-cmd"] local load_lazy = _local_2_["load-lazy"] local noremap = _local_2_.noremap vim.g.mapleader = " "
 
 
 
- do package.preload["modules.basics"] = package.preload["modules.basics"] or function(...) local _local_3_ = require("boiler") local plug = _local_3_["plug"] local function _4_() local config = require("mini.basics") return config.setup() end return plug("mini.nvim", {config = _4_}) end package.preload["modules.nfnl"] = package.preload["modules.nfnl"] or function(...) local _local_5_ = require("boiler") local plug = _local_5_["plug"] return plug("nfnl", {ft = "fennel"}) end package.preload["modules.blink"] = package.preload["modules.blink"] or function(...) local _local_6_ = require("boiler") local plug = _local_6_["plug"] local function cmp_add_icon(ctx) local icon = ctx.kind_icon if vim.tbl_contains({"Path"}, ctx.source_name) then local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label) if dev_icon then icon = dev_icon else end else icon = require("lspkind").symbolic(ctx.kind, {mode = "symbol"}) end return (icon .. ctx.icon_gap) end local function cmp_highlight(ctx) local hl = ctx.kind_hl if vim.tbl_contains({"Path"}, ctx.source_name) then local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label) if dev_icon then hl = dev_hl else end else end return hl end return plug("blink.cmp", {opts_extend = {"sources.default"}, opts = {completion = {documentation = {auto_show = true, auto_show_delay_ms = 500}, menu = {draw = {components = {kind_icon = {text = cmp_add_icon, highlight = cmp_highlight}}, columns = {{"kind_icon"}, {"label", "label_description", "source_name", gap = 1}}}}}, sources = {default = {"lsp", "path", "buffer"}}}}) end package.preload["modules.treesitter"] = package.preload["modules.treesitter"] or function(...) local _local_11_ = require("boiler") local plug = _local_11_["plug"] local function _12_(_, opts) vim.opt.rtp:prepend(_G["tree-sitter-path"]) local ts = require("nvim-treesitter.configs") return ts.setup(opts) end return plug("nvim-treesitter", {opts = {highlight = {enable = true}}, config = _12_}) end package.preload["modules.conform"] = package.preload["modules.conform"] or function(...) local _local_13_ = require("boiler") local plug = _local_13_["plug"] local function _14_() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" return nil end local function _15_() return require("conform").format({async = true}) end return plug("conform.nvim", {cmd = "ConformInfo", event = "BufWritePre", init = _14_, keys = {{"<leader>f", _15_, desc = "Format buffer", mode = ""}}, opts = {default_format_opts = {lsp_format = "fallback"}, format_on_save = {timeout_ms = 500}, formatters_by_ft = {fennel = {"fnlfmt"}, nix = {"alejandra"}, typescript = {"prettierd"}}}}) end package.preload["modules.typescript"] = package.preload["modules.typescript"] or function(...) local _local_16_ = require("boiler") local plug = _local_16_["plug"] return plug("typescript-tools.nvim", {opts = {}}) end package.preload["modules.ufo"] = package.preload["modules.ufo"] or function(...) local _local_17_ = require("boiler") local plug = _local_17_["plug"] local noremap = _local_17_["noremap"] local function _18_() return {"treesitter", "indent"} end plug("nvim-ufo", {opts = {provider_selector = _18_}}) local function _19_() return require("ufo").openAllFolds("desc", "Open all folds") end noremap({{key = "zR", action = _19_}}) local function _20_() return require("ufo").closeAllFolds("desc", "Close all folds") end return noremap({{key = "zM", action = _20_}}) end package.preload["modules.snacks"] = package.preload["modules.snacks"] or function(...) local _local_21_ = require("boiler") local plug = _local_21_["plug"] local function neorg_finder() local neorg = require("neorg") local dirman = neorg.modules.get_module("core.dirman") local _let_22_ = dirman.get_current_workspace() local workspace = _let_22_[1] local cwd = _let_22_[2] local workspace_files = dirman.get_norg_files(workspace) local tbl_21_ = {} local i_22_ = 0 for _, v in ipairs(workspace_files) do local val_23_ = {text = tostring(v:relative_to(cwd, false)), file = tostring(v)} if (nil ~= val_23_) then i_22_ = (i_22_ + 1) tbl_21_[i_22_] = val_23_ else end end return tbl_21_ end local function _24_() return Snacks.lazygit() end local function _25_() return Snacks.picker.smart() end local function _26_() return Snacks.picker.grep() end local function _27_() return Snacks.picker.buffers() end local function _28_() return Snacks.picker.diagnostics() end local function _29_() return Snacks.picker.neorg() end return plug("snacks.nvim", {keys = {{"<leader>gg", _24_, desc = "Lazygit"}, {"<leader><space>", _25_}, {"<leader>fg", _26_}, {"<leader>,", _27_}, {"<leader>ld", _28_}, {"<leader>no", _29_}}, priority = 1000, opts = {lazygit = {enabled = true}, picker = {sources = {neorg = {finder = neorg_finder}}}}, lazy = false}) end package.preload["modules.neorg"] = package.preload["modules.neorg"] or function(...) local _local_30_ = require("boiler") local plug = _local_30_["plug"] return plug("neorg", {opts = {load = {["core.defaults"] = {}, ["core.concealer"] = {}, ["core.esupports.metagen"] = {config = {type = "auto"}}, ["external.interim-ls"] = {config = {completion_provider = {enable = true, documentation = true}}}, ["core.completion"] = {config = {engine = {module_name = "external.lsp-completion"}}}, ["core.dirman"] = {config = {workspaces = {main = "~/persist/logs/notes"}, default_workspace = "main"}}}}}) end do local _ = {require("modules.basics"), require("modules.nfnl"), require("modules.blink"), require("modules.treesitter"), require("modules.conform"), require("modules.typescript"), require("modules.ufo"), require("modules.snacks"), require("modules.neorg")} end
-
- load_lazy() end
-
-
-
-
+ do
+ local function _3_()
+ local config = require("mini.basics")
+ return config.setup() end plug("mini.nvim", {config = _3_})
+ plug("nfnl", {ft = "fennel"})
 
 
+ local function _4_(_, opts) vim.opt.rtp:prepend(_G["tree-sitter-path"])
+
+ local ts = require("nvim-treesitter.configs")
+ return ts.setup(opts) end plug("nvim-treesitter", {opts = {highlight = {enable = true}}, config = _4_})
+ plug("typescript-tools.nvim", {opts = {}})
+ local function _5_() return {"treesitter", "indent"} end plug("nvim-ufo", {opts = {provider_selector = _5_}})
+
+ local function _6_() return require("ufo").openAllFolds("desc", "Open all folds") end noremap({{key = "zR", action = _6_}})
+
+ local function _7_() return require("ufo").closeAllFolds("desc", "Close all folds") end noremap({{key = "zM", action = _7_}})
+
+
+ local function neorg_finder()
+ local neorg = require("neorg")
+ local dirman = neorg.modules.get_module("core.dirman")
+ local _let_8_ = dirman.get_current_workspace() local workspace = _let_8_[1] local cwd = _let_8_[2]
+ local workspace_files = dirman.get_norg_files(workspace)
+ local tbl_26_ = {} local i_27_ = 0 for _, v in ipairs(workspace_files) do
+ local val_28_ = {text = tostring(v:relative_to(cwd, false)), file = tostring(v)} if (nil ~= val_28_) then i_27_ = (i_27_ + 1) tbl_26_[i_27_] = val_28_ else end end return tbl_26_ end
+
+
+ local function _10_() return Snacks.lazygit() end
+ local function _11_() return Snacks.picker.smart() end
+ local function _12_() return Snacks.picker.grep() end
+ local function _13_() return Snacks.picker.buffers() end
+ local function _14_() return Snacks.picker.diagnostics() end
+ local function _15_() return Snacks.picker.neorg() end plug("snacks.nvim", {keys = {{"<leader>gg", _10_, desc = "Lazygit"}, {"<leader><space>", _11_}, {"<leader>fg", _12_}, {"<leader>,", _13_}, {"<leader>ld", _14_}, {"<leader>no", _15_}}, priority = 1000, opts = {lazygit = {enabled = true}, picker = {sources = {neorg = {finder = neorg_finder}}}}, lazy = false})
+
+
+
+
+ plug("neorg", {opts = {load = {["core.defaults"] = {}, ["core.concealer"] = {}, ["core.esupports.metagen"] = {config = {type = "auto"}}, ["external.interim-ls"] = {config = {completion_provider = {enable = true, documentation = true}}}, ["core.completion"] = {config = {engine = {module_name = "external.lsp-completion"}}}, ["core.dirman"] = {config = {workspaces = {main = "~/persist/logs/notes"}, default_workspace = "main"}}}}})
 
 
 
 
 
 
+
+
+
+
+
+
+ local function _16_() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+ return nil end
+
+ local function _17_()
+ return require("conform").format({async = true}) end plug("conform.nvim", {cmd = "ConformInfo", event = "BufWritePre", init = _16_, keys = {{"<leader>f", _17_, desc = "Format buffer", mode = ""}}, opts = {default_format_opts = {lsp_format = "fallback"}, format_on_save = {timeout_ms = 500}, formatters_by_ft = {fennel = {"fnlfmt"}, nix = {"alejandra"}, typescript = {"prettierd"}}}})
+
+
+
+
+
+
+
+
+
+ local function cmp_add_icon(ctx)
+ local icon = ctx.kind_icon
+ if vim.tbl_contains({"Path"}, ctx.source_name) then
+ local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+ if dev_icon then icon = dev_icon else end else
+ icon = require("lspkind").symbolic(ctx.kind, {mode = "symbol"}) end
+ return (icon .. ctx.icon_gap) end
+
+ local function cmp_highlight(ctx)
+ local hl = ctx.kind_hl
+ if vim.tbl_contains({"Path"}, ctx.source_name) then
+
+ local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+ if dev_icon then hl = dev_hl else end else end
+ return hl end
+
+ plug("blink.cmp", {opts_extend = {"sources.default"}, opts = {completion = {documentation = {auto_show = true, auto_show_delay_ms = 500}, menu = {draw = {components = {kind_icon = {text = cmp_add_icon, highlight = cmp_highlight}}, columns = {{"kind_icon"}, {"label", "label_description", "source_name", gap = 1}}}}}, sources = {default = {"lsp", "path", "buffer"}}}}) end
+
+
+
+
+
+
+
+
+
+
+
+
+ load_lazy()
  vim.lsp.enable("fennel_ls") vim.opt.foldlevel = 99 vim.opt.foldlevelstart = 99 vim.opt.signcolumn = "number" vim.opt.number = true vim.opt.relativenumber = true vim.opt.hlsearch = false
 
 
@@ -27,10 +107,10 @@
 
  vim.cmd.colorscheme("oxocarbon")
 
- local function _31_() end
- local function _32_(...) local exrc = (vim.fn.getcwd() .. "/.nvim.lua")
+ local function _22_() end
+ local function _23_(...) local exrc = (vim.fn.getcwd() .. "/.nvim.lua")
  if vim.secure.read(exrc) then
- return vim.cmd.source(exrc) else return nil end end new_cmd("SourceExrc", _31_, _32_(...))
+ return vim.cmd.source(exrc) else return nil end end new_cmd("SourceExrc", _22_, _23_(...))
 
  noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", action = "l"}})
- local function _34_() return vim.lsp.buf.definition() end return noremap({{key = "grd", action = _34_}})
+ local function _25_() return vim.lsp.buf.definition() end return noremap({{key = "grd", action = _25_}})

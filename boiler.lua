@@ -12,8 +12,8 @@
  local function load_lazy()
 
  local lazy = require("lazy") local plugs
- do local tbl_21_ = {} local i_22_ = 0 for _, v in pairs(_G["plugin-specs"]) do
- local val_23_ = v if (nil ~= val_23_) then i_22_ = (i_22_ + 1) tbl_21_[i_22_] = val_23_ else end end plugs = tbl_21_ end
+ do local tbl_26_ = {} local i_27_ = 0 for _, v in pairs(_G["plugin-specs"]) do
+ local val_28_ = v if (nil ~= val_28_) then i_27_ = (i_27_ + 1) tbl_26_[i_27_] = val_28_ else end end plugs = tbl_26_ end
  return lazy.setup({checker = {enabled = true}, rocks = {enabled = false}, profiling = {loader = true, require = true}, spec = plugs}) end
 
 
