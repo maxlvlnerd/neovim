@@ -4,27 +4,24 @@
 
 
  do
- local function _3_()
- local config = require("mini.basics")
- return config.setup() end p("mini.nvim", {config = _3_})
  p("nfnl", {ft = "fennel"})
  p("typescript-tools.nvim", {opts = {}})
 
  local function neorg_finder()
  local neorg = require("neorg")
  local dirman = neorg.modules.get_module("core.dirman")
- local _let_4_ = dirman.get_current_workspace() local workspace = _let_4_[1] local cwd = _let_4_[2]
+ local _let_3_ = dirman.get_current_workspace() local workspace = _let_3_[1] local cwd = _let_3_[2]
  local workspace_files = dirman.get_norg_files(workspace)
  local tbl_26_ = {} local i_27_ = 0 for _, v in ipairs(workspace_files) do
  local val_28_ = {text = tostring(v:relative_to(cwd, false)), file = tostring(v)} if (nil ~= val_28_) then i_27_ = (i_27_ + 1) tbl_26_[i_27_] = val_28_ else end end return tbl_26_ end
 
 
- local function _6_() return Snacks.lazygit() end
- local function _7_() return Snacks.picker.smart() end
- local function _8_() return Snacks.picker.grep() end
- local function _9_() return Snacks.picker.buffers() end
- local function _10_() return Snacks.picker.diagnostics() end
- local function _11_() return Snacks.picker.neorg() end p("snacks.nvim", {keys = {{"<leader>gg", _6_, desc = "Lazygit"}, {"<leader><space>", _7_}, {"<leader>fg", _8_}, {"<leader>,", _9_}, {"<leader>ld", _10_}, {"<leader>no", _11_}}, priority = 1000, opts = {lazygit = {enabled = true}, picker = {sources = {neorg = {finder = neorg_finder}}}}, lazy = false})
+ local function _5_() return Snacks.lazygit() end
+ local function _6_() return Snacks.picker.smart() end
+ local function _7_() return Snacks.picker.grep() end
+ local function _8_() return Snacks.picker.buffers() end
+ local function _9_() return Snacks.picker.diagnostics() end
+ local function _10_() return Snacks.picker.neorg() end p("snacks.nvim", {keys = {{"<leader>gg", _5_, desc = "Lazygit"}, {"<leader><space>", _6_}, {"<leader>fg", _7_}, {"<leader>,", _8_}, {"<leader>ld", _9_}, {"<leader>no", _10_}}, priority = 1000, opts = {lazygit = {enabled = true}, picker = {sources = {neorg = {finder = neorg_finder}}}}, lazy = false})
 
 
 
@@ -60,8 +57,11 @@
  vim.cmd.colorscheme("oxocarbon")
 
  noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", action = "l"}})
- local function _12_() return vim.lsp.buf.definition() end noremap({{key = "grd", action = _12_}}) vim.opt.rtp:prepend(_G["tree-sitter-path"])
+ local function _11_() return vim.lsp.buf.definition() end noremap({{key = "grd", action = _11_}}) vim.opt.rtp:prepend(_G["tree-sitter-path"])
 
 
- local ts = require("nvim-treesitter.configs")
- return ts.setup({highlight = {enable = true}})
+ do local ts = require("nvim-treesitter.configs")
+ ts.setup({highlight = {enable = true}}) end
+
+ local config = require("mini.basics")
+ return config.setup()

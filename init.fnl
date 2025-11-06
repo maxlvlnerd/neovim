@@ -3,9 +3,6 @@
 (set vim.g.mapleader " ")
 ;; plugins
 (do
-  (p :mini.nvim {:config (fn []
-                           (let [config (require :mini.basics)]
-                             (config.setup)))})
   (p :nfnl {:ft :fennel})
   (p :typescript-tools.nvim {:opts {}})
 
@@ -64,3 +61,6 @@
 (vim.opt.rtp:prepend _G.tree-sitter-path)
 (let [ts (require :nvim-treesitter.configs)]
   (ts.setup {:highlight {:enable true}}))
+
+(let [config (require :mini.basics)]
+  (config.setup))
