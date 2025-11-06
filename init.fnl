@@ -7,12 +7,6 @@
                               (let [config (require :mini.basics)]
                                 (config.setup)))})
   (plug :nfnl {:ft :fennel})
-  (plug :nvim-treesitter
-        {:opts {:highlight {:enable true}}
-         :config (fn [_ opts]
-                   (vim.opt.rtp:prepend _G.tree-sitter-path)
-                   (let [ts (require :nvim-treesitter.configs)]
-                     (ts.setup opts)))})
   (plug :typescript-tools.nvim {:opts {}})
 
   (fn neorg-finder []
@@ -71,3 +65,7 @@
 
 (noremap [{:key :n :action :j} {:key :e :action :k} {:key :o :action :l}])
 (noremap [{:key :grd :action #(vim.lsp.buf.definition)}])
+
+(vim.opt.rtp:prepend _G.tree-sitter-path)
+(let [ts (require :nvim-treesitter.configs)]
+  (ts.setup {:highlight {:enable true}}))
