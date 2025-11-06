@@ -45,16 +45,7 @@
 
 
 
-
-
-
- local function _13_() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
- return nil end
-
- local function _14_()
- return require("conform").format({async = true}) end plug("conform.nvim", {cmd = "ConformInfo", event = "BufWritePre", init = _13_, keys = {{"<leader>f", _14_, desc = "Format buffer", mode = ""}}, opts = {default_format_opts = {lsp_format = "fallback"}, format_on_save = {timeout_ms = 500}, formatters_by_ft = {fennel = {"fnlfmt"}, nix = {"alejandra"}, typescript = {"prettierd"}}}})
-
-
+ plug("conform.nvim", {opts = {default_format_opts = {lsp_format = "fallback"}, format_on_save = {timeout_ms = 500}, formatters_by_ft = {fennel = {"fnlfmt"}, nix = {"alejandra"}, typescript = {"prettierd"}}}})
 
 
 
@@ -66,17 +57,18 @@
 
 
  load_lazy()
- vim.lsp.enable("fennel_ls") vim.opt.signcolumn = "number" vim.opt.number = true vim.opt.relativenumber = true vim.opt.hlsearch = false
+ vim.lsp.enable("fennel_ls") vim.opt.signcolumn = "number" vim.opt.number = true vim.opt.relativenumber = true vim.opt.hlsearch = false vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
 
 
 
 
  vim.cmd.colorscheme("oxocarbon")
 
- local function _15_()
+ local function _13_()
  local exrc = (vim.fn.getcwd() .. "/.nvim.lua")
  if vim.secure.read(exrc) then
- return vim.cmd.source(exrc) else return nil end end new_cmd("SourceExrc", _15_)
+ return vim.cmd.source(exrc) else return nil end end new_cmd("SourceExrc", _13_)
 
  noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", action = "l"}})
- local function _17_() return vim.lsp.buf.definition() end return noremap({{key = "grd", action = _17_}})
+ local function _15_() return vim.lsp.buf.definition() end return noremap({{key = "grd", action = _15_}})
