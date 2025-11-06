@@ -30,7 +30,6 @@
     my-plugins = with pkgs.vimPlugins; [
       parinfer-rust
       mini-nvim
-      nvim-lspconfig
       nfnl
       # conjure
       oxocarbon-nvim
