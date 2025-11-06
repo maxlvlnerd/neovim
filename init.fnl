@@ -58,11 +58,6 @@
 (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()")
 (vim.cmd.colorscheme :oxocarbon)
 
-(new-cmd :SourceExrc (fn []
-                       (let [exrc (.. (vim.fn.getcwd) :/.nvim.lua)]
-                         (when (vim.secure.read exrc)
-                           (vim.cmd.source exrc)))))
-
 (noremap [{:key :n :action :j} {:key :e :action :k} {:key :o :action :l}])
 (noremap [{:key :grd :action #(vim.lsp.buf.definition)}])
 

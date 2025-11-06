@@ -59,13 +59,8 @@
 
  vim.cmd.colorscheme("oxocarbon")
 
- local function _12_()
- local exrc = (vim.fn.getcwd() .. "/.nvim.lua")
- if vim.secure.read(exrc) then
- return vim.cmd.source(exrc) else return nil end end new_cmd("SourceExrc", _12_)
-
  noremap({{key = "n", action = "j"}, {key = "e", action = "k"}, {key = "o", action = "l"}})
- local function _14_() return vim.lsp.buf.definition() end noremap({{key = "grd", action = _14_}}) vim.opt.rtp:prepend(_G["tree-sitter-path"])
+ local function _12_() return vim.lsp.buf.definition() end noremap({{key = "grd", action = _12_}}) vim.opt.rtp:prepend(_G["tree-sitter-path"])
 
 
  local ts = require("nvim-treesitter.configs")
