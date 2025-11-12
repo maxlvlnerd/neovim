@@ -5,8 +5,6 @@
 
  do
  p("nfnl", {ft = "fennel"})
- p("typescript-tools.nvim", {opts = {}})
-
  local function neorg_finder()
  local neorg = require("neorg")
  local dirman = neorg.modules.get_module("core.dirman")

@@ -4,8 +4,6 @@
 ;; plugins
 (do
   (p :nfnl {:ft :fennel})
-  (p :typescript-tools.nvim {:opts {}})
-
   (fn neorg-finder []
     (let [neorg (require :neorg)
           dirman (neorg.modules.get_module :core.dirman)

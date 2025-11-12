@@ -26,7 +26,7 @@
       deps = deps;
       plug = p;
     };
-    extra-programs = with pkgs; [fennel-ls fnlfmt alejandra rust-analyzer typescript prettierd nodejs];
+    extra-programs = with pkgs; [fennel-ls fnlfmt alejandra rust-analyzer nodejs];
     my-plugins = with pkgs.vimPlugins; [
       parinfer-rust
       mini-nvim
@@ -61,7 +61,6 @@
         nui-nvim
       ])
       (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust p.typescript p.tsx p.tree-sitter-norg p.tree-sitter-norg-meta]))
-      (with-deps typescript-tools-nvim [plenary-nvim nvim-lspconfig])
       (with-deps blink-cmp [lspkind-nvim nvim-web-devicons])
     ];
     plugins-normalized = pkgs.lib.map normalize-plugin my-plugins;
