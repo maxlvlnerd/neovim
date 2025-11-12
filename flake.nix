@@ -61,7 +61,7 @@
         nui-nvim
       ])
       (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust p.typescript p.tsx p.tree-sitter-norg p.tree-sitter-norg-meta]))
-      (with-deps blink-cmp [lspkind-nvim nvim-web-devicons])
+      blink-cmp
     ];
     plugins-normalized = pkgs.lib.map normalize-plugin my-plugins;
     tree-sitter-grammars = let
