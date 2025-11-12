@@ -61,5 +61,8 @@
  do local ts = require("nvim-treesitter.configs")
  ts.setup({highlight = {enable = true}}) end
 
- local config = require("mini.basics")
+ do local config = require("mini.basics")
+ config.setup() end
+
+ local config = require("mini.surround")
  return config.setup()

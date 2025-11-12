@@ -62,3 +62,6 @@
 
 (let [config (require :mini.basics)]
   (config.setup))
+
+(let [config (require :mini.surround)]
+  (config.setup))
