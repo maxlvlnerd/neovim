@@ -62,6 +62,7 @@
       ])
       (nvim-treesitter.withPlugins (p: [p.fennel p.nix p.rust p.typescript p.tsx p.tree-sitter-norg p.tree-sitter-norg-meta]))
       blink-cmp
+      oil-nvim
     ];
     plugins-normalized = pkgs.lib.map normalize-plugin my-plugins;
     tree-sitter-grammars = let

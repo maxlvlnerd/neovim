@@ -5,6 +5,10 @@
 
  do
  p("nfnl", {ft = "fennel"})
+ p("oil.nvim", {opts = {}, keys = {{"-", "<CMD>Oil<CR>", desc = "Open parent directory"}}, lazy = false})
+
+
+
  local function neorg_finder()
  local neorg = require("neorg")
  local dirman = neorg.modules.get_module("core.dirman")

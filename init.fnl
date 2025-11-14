@@ -4,6 +4,10 @@
 ;; plugins
 (do
   (p :nfnl {:ft :fennel})
+  (p :oil.nvim {:opts {}
+                :keys [{1 "-" 2 :<CMD>Oil<CR> :desc "Open parent directory"}]
+                :lazy false})
+
   (fn neorg-finder []
     (let [neorg (require :neorg)
           dirman (neorg.modules.get_module :core.dirman)
