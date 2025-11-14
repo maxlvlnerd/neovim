@@ -51,8 +51,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "benlubas";
             repo = "neorg-interim-ls";
-            rev = "aab7f01bab1db773b18199af1633039933c1fe29";
-            sha256 = "s9AUVQ8pGsOE95CdbqvpP5/rFaSucG92Wwx1tvib+0M=";
+            rev = "e2f86982ba5857ed5581ff5814edd57b5c2c67e0";
+            sha256 = "EdKEaxdme4tODtoJv8Yw/x3YtQoDLK0pmTT7xgE1LYQ=";
           };
           doCheck = false;
         })
